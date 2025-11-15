@@ -77,7 +77,128 @@ export default {
         author: 'Miguel de Cervantes',
         publisher: 'Real Academia Española',
         isbn: '978-8420412146'
+      },
+      {
+        id: 3,
+      title: "1984",
+      price: "29.99",  
+      category: "Distopía / Clásico",
+      description: "Novela distópica de George Orwell sobre vigilancia masiva, manipulación del lenguaje y totalitarismo.",
+      image: "https://m.media-amazon.com/images/I/41K0mSalx-L._SX331_BO1,204,203,200_.jpg",
+      rating: { rate: 4.8, count: 61 },
+      author: "George Orwell",
+      publisher: "Secker & Warburg",  
+      isbn: "0452284236" 
+      },
+      {
+      id: 4,
+      title: "Cien años de soledad",
+      price: "29.99",
+      category: "Clásicos / Realismo mágico",
+      description: "La epopeya de la familia Buendía en el mítico pueblo de Macondo, una mezcla de historia, mitos y realismo mágico.",
+      image: "https://m.media-amazon.com/images/I/51+8p0AV9wL._SX331_BO1,204,203,200_.jpg",
+      rating: { rate: 4.9, count: 215 },
+      author: "Gabriel García Márquez",
+      publisher: "Random House", 
+      isbn: "9788439728368" 
+      },
+      {
+      id: 5,
+      title: "El principito",
+      price: "15.99",
+      category: "Infantil / Filosófico",
+      description: "Un pequeño príncipe viaja desde su asteroide a la Tierra, encontrando personajes que le enseñan sobre la vida, la amistad y la esencia de las cosas.",
+      image: "https://m.media-amazon.com/images/I/51dJnhv5i9L._SX331_BO1,204,203,200_.jpg",
+      rating: { rate: 4.8, count: 51 },
+      author: "Antoine de Saint-Exupéry",
+      publisher: "Difusora Larousse", 
+      isbn: "9786072133426" 
+      },
+      {
+      id: 6,
+      title: "Orgullo y prejuicio",
+      price: "10.99",
+      category: "Clásico romántico",
+      description: "Novela de Jane Austen sobre las convenciones sociales, el amor y los prejuicios, centrada en Elizabeth Bennet y el señor Darcy.",
+      image: "https://m.media-amazon.com/images/I/51o5dnjk07L._SX331_BO1,204,203,200_.jpg",
+      rating: { rate: 5.0, count: 4 },
+      author: "Jane Austen",
+      publisher: "Austral",  
+      isbn: "9788467045642" 
+      },
+      {
+      id: 7,
+      title: "Crimen y castigo",
+      price: "23.99",
+      category: "Clásico / Psicológico",
+      description: "La intensa historia de Raskólnikov, un joven estudiante que comete un crimen con la creencia de que puede justificarlo moralmente, pero se enfrenta a la culpa.",
+      image: "https://m.media-amazon.com/images/I/51H0gIb8ZtL._SX331_BO1,204,203,200_.jpg",
+      rating: { rate: 4.8, count: 32 },
+      author: "Fiódor Dostoyevski",
+      publisher: "Penguin Clásicos", 
+      isbn: "9788491050063" 
+      },
+      {
+      id: 8,
+      title: "Sapiens: De animales a dioses",
+      price: "25.99",
+      category: "No ficción / Historia",
+      description: "Un fascinante recorrido por la historia de la humanidad, desde la aparición del Homo sapiens hasta nuestras sociedades modernas.",
+      image: "https://m.media-amazon.com/images/I/41XJpceJVhL._SX331_BO1,204,203,200_.jpg",
+      rating: { rate: 4.8, count: 722 },
+      author: "Yuval Noah Harari",
+      publisher: "Cornerstone / Penguin",  
+      isbn: "9781529913934"
+      },
+      {
+      id: 9,
+      title: "El diario de Ana Frank",
+      price: "32.99",
+      category: "Testimonio / Historia",
+      description: "Las memorias íntimas de Ana Frank, una niña judía escondida durante la Segunda Guerra Mundial, que reflejan sus miedos, esperanza y humanidad.",
+      image: "https://m.media-amazon.com/images/I/51Bz60iDotL._SX331_BO1,204,203,200_.jpg",
+      rating: { rate: 4.8, count: 389 },
+      author: "Ana Frank",
+      publisher: "Mundo del Libro / Edición latinoamericana", 
+      isbn: "9789584860569"  
+      },
+      {
+      id: 10,
+      title: "Fahrenheit 451",
+      price: "15.99",
+      category: "Distopía / Ciencia ficción",
+      description: "Novela de Ray Bradbury sobre una sociedad en que los libros están prohibidos y los ‘bomberos’ queman cualquier libro que encuentran.",
+      image: "https://m.media-amazon.com/images/I/41FDrg+kZQL._SX331_BO1,204,203,200_.jpg",
+      rating: { rate: 4.6, count: 37 },
+      author: "Ray Bradbury",
+      publisher: "Simon & Schuster / Edición común",
+      isbn: "9781451673319" 
+      },
+      {
+      id: 11,
+      title: "La sombra del viento",
+      price: "18.99",
+      category: "Novela de misterio / Literaria",
+      description: "En la Barcelona posguerra, Daniel Sempere descubre un libro maldito que lo lleva a desentrañar secretos, intrigas y amores ocultos entre las páginas.",
+      image: "https://m.media-amazon.com/images/I/51r3NeK5z3L._SX331_BO1,204,203,200_.jpg",
+      rating: { rate: 4.8, count: 128 },
+      author: "Carlos Ruiz Zafón",
+      publisher: "Planeta / Booket", 
+      isbn: "9788408092643" 
+      },
+      {
+      id: 12,
+      title: "El poder del ahora",
+      price: "12.99",
+      category: "Autoayuda / Espiritualidad",
+      description: "Guía de Eckhart Tolle para vivir en el presente, liberar la mente del pasado y el futuro, y encontrar paz interior.",
+      image: "https://m.media-amazon.com/images/I/41NQbqHqQXL._SX331_BO1,204,203,200_.jpg",
+      rating: { rate: 4.8, count: 366 },
+      author: "Eckhart Tolle",
+      publisher: "Penguin Libros",
+      isbn: "9789588618791"
       }
+
     ]
   },
 
