@@ -1,5 +1,13 @@
 <template>
   <div class="clientes-view">
+    <!-- Breadcrumbs -->
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><router-link to="/dashboard">🏠 Inicio</router-link></li>
+        <li class="breadcrumb-item active">👥 Clientes</li>
+      </ol>
+    </nav>
+
     <h2 class="mb-4">👥 Gestión de Clientes</h2>
 
     <!-- Verificar si el usuario es cliente -->
@@ -66,10 +74,18 @@
       </div>
     </div>
 
-    <!-- Tabla de clientes registrados -->
+    <!-- Buscador y tabla de clientes -->
     <div class="card">
-      <div class="card-header bg-secondary-custom text-white">
-        <h5>📋 Clientes Registrados ({{ clientes.length }})</h5>
+      <div class="card-header bg-secondary-custom text-white d-flex justify-content-between align-items-center">
+        <h5 class="mb-0">📋 Clientes Registrados ({{ clientesFiltrados.length }})</h5>
+        <div class="search-box">
+          <input
+            type="text"
+            class="form-control form-control-sm"
+            placeholder="🔍 Buscar por nombre..."
+            v-model="busqueda"
+          />
+        </div>
       </div>
       <div class="card-body">
         <div class="table-responsive">
@@ -82,19 +98,140 @@
                 <th>Teléfono</th>
                 <th>Dirección</th>
                 <th>Fecha de Registro</th>
+                <th>Acciones</th>
               </tr>
             </thead>
             <tbody>
-              <tr v-for="cliente in clientes" :key="cliente.id">
+              <tr v-for="cliente in clientesFiltrados" :key="cliente.id">
                 <td>{{ cliente.id }}</td>
                 <td>{{ cliente.nombre }}</td>
                 <td>{{ cliente.email }}</td>
                 <td>{{ cliente.telefono }}</td>
                 <td>{{ cliente.direccion || 'N/A' }}</td>
                 <td>{{ cliente.fechaRegistro }}</td>
+                <td>
+                  <button
+                    class="btn btn-sm btn-warning me-1"
+                    @click="editarCliente(cliente)"
+                    title="Editar"
+                  >
+                    ✏️
+                  </button>
+                  <button
+                    class="btn btn-sm btn-danger"
+                    @click="confirmarEliminar(cliente)"
+                    title="Eliminar"
+                  >
+                    🗑️
+                  </button>
+                </td>
               </tr>
             </tbody>
           </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Toast de notificaciones -->
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+      <div
+        ref="toastElement"
+        class="toast align-items-center text-white border-0"
+        :class="toastClass"
+        role="alert"
+      >
+        <div class="d-flex">
+          <div class="toast-body">{{ toastMessage }}</div>
+          <button
+            type="button"
+            class="btn-close btn-close-white me-2 m-auto"
+            data-bs-dismiss="toast"
+          ></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal de edición -->
+    <div class="modal fade" id="modalEditar" tabindex="-1" ref="modalEditar">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Editar Cliente</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body">
+            <form @submit.prevent="actualizarCliente">
+              <div class="mb-3">
+                <label class="form-label">Nombre completo</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  v-model="clienteEditando.nombre"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Email</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  v-model="clienteEditando.email"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Teléfono</label>
+                <input
+                  type="tel"
+                  class="form-control"
+                  v-model="clienteEditando.telefono"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Dirección</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  v-model="clienteEditando.direccion"
+                />
+              </div>
+              <div class="d-flex gap-2">
+                <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                  Cancelar
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal de confirmación -->
+    <div class="modal fade" id="modalConfirmar" tabindex="-1" ref="modalConfirmar">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header bg-danger text-white">
+            <h5 class="modal-title">⚠️ Confirmar Eliminación</h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body" v-if="clienteAEliminar">
+            <p>¿Estás seguro de que deseas eliminar este cliente?</p>
+            <div class="alert alert-warning">
+              <strong>{{ clienteAEliminar.nombre }}</strong><br>
+              <small>Email: {{ clienteAEliminar.email }}</small>
+            </div>
+            <p class="text-muted small">Esta acción no se puede deshacer.</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+              Cancelar
+            </button>
+            <button type="button" class="btn btn-danger" @click="eliminarCliente">
+              Eliminar
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -102,6 +239,8 @@
 </template>
 
 <script>
+import { Modal, Toast } from 'bootstrap'
+
 export default {
   name: 'ClientesView',
   data() {
@@ -109,12 +248,26 @@ export default {
       esCliente: false,
       clienteActual: null,
       clientes: [],
+      busqueda: '',
       formulario: {
         nombre: '',
         email: '',
         telefono: '',
         direccion: ''
-      }
+      },
+      clienteEditando: {},
+      clienteAEliminar: null,
+      toastMessage: '',
+      toastClass: 'bg-success'
+    }
+  },
+  computed: {
+    clientesFiltrados() {
+      if (!this.busqueda) return this.clientes
+      
+      return this.clientes.filter(cliente =>
+        cliente.nombre.toLowerCase().includes(this.busqueda.toLowerCase())
+      )
     }
   },
   mounted() {
@@ -127,7 +280,6 @@ export default {
       if (clientesGuardados) {
         this.clientes = JSON.parse(clientesGuardados)
       } else {
-        // Clientes de ejemplo
         this.clientes = [
           {
             id: 1,
@@ -167,15 +319,50 @@ export default {
       this.clienteActual = nuevoCliente
       this.esCliente = true
       
-      alert('✅ ¡Registro exitoso! Ahora eres cliente de nuestra librería')
+      this.mostrarToast('✅ ¡Registro exitoso! Ahora eres cliente de nuestra librería', 'bg-success')
       
-      // Limpiar formulario
       this.formulario = {
         nombre: '',
         email: '',
         telefono: '',
         direccion: ''
       }
+    },
+    editarCliente(cliente) {
+      this.clienteEditando = { ...cliente }
+      const modal = new Modal(this.$refs.modalEditar)
+      modal.show()
+    },
+    actualizarCliente() {
+      const index = this.clientes.findIndex(c => c.id === this.clienteEditando.id)
+      if (index !== -1) {
+        this.clientes[index] = this.clienteEditando
+        localStorage.setItem('clientes', JSON.stringify(this.clientes))
+        this.mostrarToast('✅ Cliente actualizado correctamente', 'bg-success')
+        const modal = Modal.getInstance(this.$refs.modalEditar)
+        modal.hide()
+      }
+    },
+    confirmarEliminar(cliente) {
+      this.clienteAEliminar = cliente
+      const modal = new Modal(this.$refs.modalConfirmar)
+      modal.show()
+    },
+    eliminarCliente() {
+      const index = this.clientes.findIndex(c => c.id === this.clienteAEliminar.id)
+      if (index !== -1) {
+        this.clientes.splice(index, 1)
+        localStorage.setItem('clientes', JSON.stringify(this.clientes))
+        this.mostrarToast('✅ Cliente eliminado correctamente', 'bg-success')
+        const modal = Modal.getInstance(this.$refs.modalConfirmar)
+        modal.hide()
+      }
+    },
+    mostrarToast(mensaje, clase) {
+      this.toastMessage = mensaje
+      this.toastClass = clase
+      const toast = new Toast(this.$refs.toastElement)
+      toast.show()
     }
   }
 }
@@ -184,6 +371,16 @@ export default {
 <style scoped>
 .clientes-view {
   padding: 20px;
+}
+
+.breadcrumb {
+  background-color: transparent;
+  padding: 0;
+  margin-bottom: 1rem;
+}
+
+.search-box {
+  width: 250px;
 }
 
 .table {

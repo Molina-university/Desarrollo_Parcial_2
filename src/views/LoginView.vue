@@ -24,23 +24,38 @@
             v-model="username"
             placeholder="Ingresa tu usuario"
             required
+            :disabled="loading"
           />
         </div>
 
         <div class="mb-3">
           <label for="password" class="form-label">Contraseña</label>
-          <input
-            type="password"
-            class="form-control"
-            id="password"
-            v-model="password"
-            placeholder="Ingresa tu contraseña"
-            required
-          />
+          <div class="password-input-group">
+            <input
+              :type="mostrarPassword ? 'text' : 'password'"
+              class="form-control"
+              id="password"
+              v-model="password"
+              placeholder="Ingresa tu contraseña"
+              required
+              :disabled="loading"
+            />
+            <button
+              type="button"
+              class="btn-toggle-password"
+              @click="mostrarPassword = !mostrarPassword"
+              tabindex="-1"
+            >
+              {{ mostrarPassword ? '👁️' : '👁️‍🗨️' }}
+            </button>
+          </div>
         </div>
 
         <button type="submit" class="btn btn-primary w-100" :disabled="loading">
-          <span v-if="loading">Iniciando sesión...</span>
+          <span v-if="loading">
+            <span class="spinner-border spinner-border-sm me-2"></span>
+            Iniciando sesión...
+          </span>
           <span v-else>Iniciar Sesión</span>
         </button>
       </form>
@@ -55,7 +70,7 @@
       </div>
     </div>
   </div>
-</template> 
+</template>
 
 <script>
 import usuarios from '@/data/usuarios.json'
@@ -66,6 +81,7 @@ export default {
     return {
       username: '',
       password: '',
+      mostrarPassword: false,
       error: '',
       loading: false
     }
@@ -75,17 +91,13 @@ export default {
       this.error = ''
       this.loading = true
 
-      // Simular delay de autenticación
       setTimeout(() => {
-        // Buscar usuario en el JSON
         const usuario = usuarios.find(
           (u) => u.username === this.username && u.password === this.password
         )
 
         if (usuario) {
-          // Guardar usuario en localStorage
           localStorage.setItem('usuario', JSON.stringify(usuario))
-          // Redirigir al dashboard
           this.$router.push('/dashboard')
         } else {
           this.error = 'Usuario o contraseña incorrectos'
@@ -96,7 +108,6 @@ export default {
     }
   },
   mounted() {
-    // Si ya hay un usuario logueado, redirigir al dashboard
     const usuario = localStorage.getItem('usuario')
     if (usuario) {
       this.$router.push('/dashboard')
@@ -111,7 +122,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
   padding: 20px;
 }
 
@@ -119,13 +130,68 @@ export default {
   background: white;
   padding: 40px;
   border-radius: 15px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
   max-width: 450px;
   width: 100%;
+  animation: slideIn 0.5s ease;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .login-card h2 {
   color: #333;
   font-weight: bold;
+}
+
+.password-input-group {
+  position: relative;
+}
+
+.password-input-group input {
+  padding-right: 45px;
+}
+
+.btn-toggle-password {
+  position: absolute;
+  right: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 5px 10px;
+  transition: opacity 0.3s;
+}
+
+.btn-toggle-password:hover {
+  opacity: 0.7;
+}
+
+.btn-primary {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+  transition: all 0.3s;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background-color: var(--color-primary-light);
+  border-color: var(--color-primary-light);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.btn-primary:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
 }
 </style>
