@@ -1,6 +1,6 @@
 <template>
   <div class="clientes-view">
-    <!-- Breadcrumbs -->
+    <!-- Breadcrumbs. -->
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><router-link to="/dashboard">🏠 Inicio</router-link></li>
@@ -10,7 +10,7 @@
 
     <h2 class="mb-4">👥 Gestión de Clientes</h2>
 
-    <!-- Verificar si el usuario es cliente -->
+    <!-- Verificar si el usuario es cliente. -->
     <div v-if="!esCliente" class="alert alert-info">
       <h5>ℹ️ No estás registrado como cliente</h5>
       <p>Completa el formulario para registrarte en nuestra librería</p>
@@ -21,7 +21,7 @@
       <p>Bienvenido de nuevo, {{ clienteActual.nombre }}</p>
     </div>
 
-    <!-- Formulario de registro -->
+    <!-- Formulario de registro. -->
     <div class="card mb-4" v-if="!esCliente">
       <div class="card-header bg-primary-custom text-white">
         <h5>📝 Registro de Cliente</h5>
@@ -74,7 +74,7 @@
       </div>
     </div>
 
-    <!-- Buscador y tabla de clientes -->
+    <!-- Buscador y tabla de clientes. -->
     <div class="card">
       <div class="card-header bg-secondary-custom text-white d-flex justify-content-between align-items-center">
         <h5 class="mb-0">📋 Clientes Registrados ({{ clientesFiltrados.length }})</h5>
@@ -132,7 +132,7 @@
       </div>
     </div>
 
-    <!-- Toast de notificaciones -->
+    <!-- Toast de notificaciones. -->
     <div class="toast-container position-fixed bottom-0 end-0 p-3">
       <div
         ref="toastElement"
@@ -151,7 +151,7 @@
       </div>
     </div>
 
-    <!-- Modal de edición -->
+    <!-- Modal de edición. -->
     <div class="modal fade" id="modalEditar" tabindex="-1" ref="modalEditar">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -208,7 +208,7 @@
       </div>
     </div>
 
-    <!-- Modal de confirmación -->
+    <!-- Modal de confirmación. -->
     <div class="modal fade" id="modalConfirmar" tabindex="-1" ref="modalConfirmar">
       <div class="modal-dialog">
         <div class="modal-content">

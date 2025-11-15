@@ -14,7 +14,7 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto align-items-center">
-          <!-- Botón de modo oscuro -->
+          <!-- Botón de modo oscuro. -->
           <li class="nav-item me-3">
             <button
               class="btn btn-sm btn-outline-light dark-mode-toggle"
@@ -25,14 +25,14 @@
             </button>
           </li>
           
-          <!-- Nombre del usuario -->
+          <!-- Nombre del usuario. -->
           <li class="nav-item me-3">
             <span class="nav-link text-white">
               👤 {{ usuarioNombre }}
             </span>
           </li>
           
-          <!-- Botón cerrar sesión -->
+          <!-- Botón cerrar sesión. -->
           <li class="nav-item">
             <button class="btn btn-outline-light btn-sm" @click="cerrarSesion">
               🚪 Cerrar Sesión
@@ -59,7 +59,7 @@ export default {
     }
   },
   mounted() {
-    // Cargar preferencia de modo oscuro desde localStorage
+    // Cargar preferencia de modo oscuro desde localStorage.
     const savedDarkMode = localStorage.getItem('darkMode')
     if (savedDarkMode === 'true') {
       this.darkMode = true

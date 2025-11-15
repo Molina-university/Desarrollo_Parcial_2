@@ -1,6 +1,6 @@
 <template>
   <div class="product-view">
-    <!-- Breadcrumbs -->
+    <!-- Breadcrumbs. -->
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><router-link to="/dashboard">🏠 Inicio</router-link></li>
@@ -15,7 +15,7 @@
       </button>
     </div>
 
-    <!-- Loading -->
+    <!-- Loading. -->
     <div v-if="loading" class="text-center py-5">
       <div class="spinner-border text-primary" role="status">
         <span class="visually-hidden">Cargando...</span>
@@ -23,7 +23,7 @@
       <p class="mt-3">Cargando libros...</p>
     </div>
 
-    <!-- Lista de productos con paginación -->
+    <!-- Lista de productos con paginación. -->
     <div v-else>
       <div class="row g-4 mb-4">
         <div
@@ -40,7 +40,7 @@
         </div>
       </div>
 
-      <!-- Paginación -->
+      <!-- Paginación. -->
       <nav v-if="totalPaginas > 1">
         <ul class="pagination justify-content-center">
           <li class="page-item" :class="{ disabled: paginaActual === 1 }">
@@ -61,7 +61,7 @@
       </nav>
     </div>
 
-    <!-- Toast de notificaciones -->
+    <!-- Toast de notificaciones. -->
     <div class="toast-container position-fixed bottom-0 end-0 p-3">
       <div
         ref="toastElement"
@@ -80,7 +80,7 @@
       </div>
     </div>
 
-    <!-- Modal para ver detalles -->
+    <!-- Modal para ver detalles. -->
     <div class="modal fade" id="modalDetalle" tabindex="-1" ref="modalDetalle">
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -125,7 +125,7 @@
       </div>
     </div>
 
-    <!-- Modal para crear/editar -->
+    <!-- Modal para crear/editar. -->
     <div class="modal fade" id="modalForm" tabindex="-1" ref="modalForm">
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -244,7 +244,7 @@
       </div>
     </div>
 
-    <!-- Modal de confirmación de eliminación -->
+    <!-- Modal de confirmación de eliminación. -->
     <div class="modal fade" id="modalConfirmar" tabindex="-1" ref="modalConfirmar">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -301,10 +301,10 @@ export default {
         description: '',
         image: ''
       },
-      // Paginación
+      // Paginación.
       paginaActual: 1,
       itemsPorPagina: 8,
-      // Toast
+      // Toast.
       toastMessage: '',
       toastClass: 'bg-success'
     }

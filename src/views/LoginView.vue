@@ -7,13 +7,13 @@
         <p class="text-muted">Inicia sesión para continuar</p>
       </div>
 
-      <!-- Alerta de error -->
+      <!-- Alerta de error. -->
       <div v-if="error" class="alert alert-danger alert-dismissible fade show" role="alert">
         <strong>❌ Error:</strong> {{ error }}
         <button type="button" class="btn-close" @click="error = ''"></button>
       </div>
 
-      <!-- Formulario de login -->
+      <!-- Formulario de login. -->
       <form @submit.prevent="iniciarSesion">
         <div class="mb-3">
           <label for="username" class="form-label">Usuario</label>
@@ -60,7 +60,7 @@
         </button>
       </form>
 
-      <!-- Información de usuarios de prueba -->
+      <!-- Información de usuarios de prueba. -->
       <div class="mt-4 p-3 bg-light rounded">
         <small class="text-muted">
           <strong>👤 Usuarios de prueba:</strong><br />

@@ -10,5 +10,47 @@
     "username": "usuario",
     "password": "user123",
     "nombre": "Usuario Demo"
+  },
+  {
+    "id": 3,
+    "username": "Jesus",
+    "password": "jesus123",
+    "nombre": "Jesus Sanchez"
+  },
+  {
+    "id": 4,
+    "username": "Maria",
+    "password": "maria123",
+    "nombre": "Maria Garcia"
+  },
+  {
+    "id": 5,
+    "username": "Carlos",
+    "password": "carlos123",
+    "nombre": "Carlos Lopez"
+  },
+  {
+    "id": 6,
+    "username": "Ana",
+    "password": "ana123",
+    "nombre": "Ana Martinez"
+  },
+  {
+    "id": 7,
+    "username": "Luis",
+    "password": "luis123",
+    "nombre": "Luis Rodriguez"
+  },
+  {
+    "id": 8,
+    "username": "Sofia",
+    "password": "sofia123",
+    "nombre": "Sofia Hernandez"
+  },
+  {
+    "id": 9,
+    "username": "Paula",
+    "password": "paula123",
+    "nombre": "Paula Echavez"
   }
 ]

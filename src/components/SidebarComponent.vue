@@ -1,6 +1,6 @@
 <template>
   <div class="sidebar" :class="{ 'sidebar-hidden': !isOpen }">
-    <!-- Botón toggle para móvil -->
+    <!-- Botón toggle para móvil. -->
     <button class="sidebar-toggle" @click="toggleSidebar">
       {{ isOpen ? '◀' : '▶' }}
     </button>
@@ -47,7 +47,7 @@ export default {
     }
   },
   mounted() {
-    // Cerrar automáticamente en pantallas pequeñas
+    // Cerrar automáticamente en pantallas pequeñas.
     if (window.innerWidth < 768) {
       this.isOpen = false
     }

@@ -4,7 +4,7 @@
     <div class="card-body d-flex flex-column">
       <h5 class="card-title">{{ producto.title }}</h5>
       
-      <!-- Autor y categoría -->
+      <!-- Autor y categoría. -->
       <div class="mb-2">
         <span class="badge bg-secondary mb-1">{{ producto.category }}</span>
         <p class="text-muted small mb-0">

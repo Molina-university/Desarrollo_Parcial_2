@@ -1,6 +1,6 @@
 <template>
   <div class="home-view">
-    <!-- Breadcrumbs -->
+    <!-- Breadcrumbs. -->
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item active">🏠 Inicio</li>
@@ -9,7 +9,7 @@
 
     <h1 class="mb-4">📚 Bienvenido a la Librería Online</h1>
     
-    <!-- Tarjetas de estadísticas -->
+    <!-- Tarjetas de estadísticas. -->
     <div class="row g-4 mb-5">
       <div class="col-md-3">
         <div class="stat-card bg-primary-custom text-white">
@@ -52,7 +52,7 @@
       </div>
     </div>
 
-    <!-- Libros agregados recientemente -->
+    <!-- Libros agregados recientemente. -->
     <div class="recent-books mb-5" v-if="librosRecientes.length > 0">
       <h3 class="mb-3">📕 Últimos Libros Agregados</h3>
       <div class="row g-3">
@@ -69,7 +69,7 @@
       </div>
     </div>
 
-    <!-- Sección de accesos rápidos -->
+    <!-- Sección de accesos rápidos. -->
     <div class="quick-actions mb-5">
       <h3 class="mb-3">Accesos Rápidos</h3>
       <div class="row g-3">
@@ -99,7 +99,7 @@
       </div>
     </div>
 
-    <!-- Información del usuario -->
+    <!-- Información del usuario. -->
     <div class="user-info-card">
       <h4>👤 Información de la sesión</h4>
       <p><strong>Usuario:</strong> {{ usuario.nombre }}</p>
@@ -129,13 +129,13 @@ export default {
     }
   },
   async mounted() {
-    // Cargar información del usuario
+    // Cargar información del usuario.
     const usuarioData = localStorage.getItem('usuario')
     if (usuarioData) {
       this.usuario = JSON.parse(usuarioData)
     }
 
-    // Obtener fecha actual
+    // Obtener fecha actual.
     const fecha = new Date()
     this.fechaActual = fecha.toLocaleDateString('es-ES', {
       year: 'numeric',
@@ -145,30 +145,30 @@ export default {
       minute: '2-digit'
     })
 
-    // Cargar estadísticas
+    // Cargar estadísticas.
     await this.cargarEstadisticas()
   },
   methods: {
     async cargarEstadisticas() {
       try {
-        // Cargar libros
+        // Cargar libros.
         const productos = await productService.getAllProducts()
         this.totalLibros = productos.length
         
-        // Obtener últimos 3 libros
+        // Obtener últimos 3 libros.
         this.librosRecientes = productos.slice(-3).reverse()
         
-        // Contar categorías únicas
+        // Contar categorías únicas.
         const categorias = new Set(productos.map(p => p.category))
         this.totalCategorias = categorias.size
         
-        // Cargar clientes
+        // Cargar clientes.
         const clientes = localStorage.getItem('clientes')
         if (clientes) {
           this.totalClientes = JSON.parse(clientes).length
         }
         
-        // Cargar valoraciones
+        // Cargar valoraciones.
         const valoraciones = localStorage.getItem('valoraciones')
         if (valoraciones) {
           const vals = JSON.parse(valoraciones)

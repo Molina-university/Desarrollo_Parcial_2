@@ -1,21 +1,21 @@
 <template>
   <div class="dashboard-layout">
-    <!-- Navbar superior -->
+    <!-- Navbar superior. -->
     <NavbarComponent :usuario-nombre="usuarioNombre" />
 
-    <!-- Contenedor principal -->
+    <!-- Contenedor principal. -->
     <div class="main-container">
       <!-- Sidebar lateral -->
       <SidebarComponent />
 
-      <!-- Contenido principal -->
+      <!-- Contenido principal. -->
       <main class="content">
         <div class="container-fluid py-4">
-          <!-- Aquí se cargan las vistas hijas -->
+          <!-- Aquí se cargan las vistas hijas. -->
           <router-view />
         </div>
 
-        <!-- Footer -->
+        <!-- Footer. -->
         <FooterComponent />
       </main>
     </div>
@@ -40,14 +40,14 @@ export default {
     }
   },
   mounted() {
-    // Verificar si hay usuario logueado
+    // Verificar si hay usuario logueado.
     const usuario = localStorage.getItem('usuario')
 
     if (!usuario) {
-      // Si no hay usuario, redirigir al login
+      // Si no hay usuario, redirigir al login.
       this.$router.push('/login')
     } else {
-      // Cargar nombre del usuario
+      // Cargar nombre del usuario.
       const usuarioObj = JSON.parse(usuario)
       this.usuarioNombre = usuarioObj.nombre
     }
@@ -65,12 +65,12 @@ export default {
 .main-container {
   display: flex;
   flex: 1;
-  padding-top: 56px; /* Altura del navbar */
+  padding-top: 56px; /* Altura del navbar. */
 }
 
 .content {
   flex: 1;
-  margin-left: 250px; /* Ancho del sidebar */
+  margin-left: 250px; /* Ancho del sidebar. */
   display: flex;
   flex-direction: column;
   min-height: calc(100vh - 56px);

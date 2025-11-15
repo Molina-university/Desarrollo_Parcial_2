@@ -2,7 +2,7 @@
   <div class="valoraciones-view">
     <h2 class="mb-4">⭐ Sistema de Valoraciones</h2>
 
-    <!-- Formulario para calificar -->
+    <!-- Formulario para calificar. -->
     <div class="card mb-4">
       <div class="card-header bg-primary-custom text-white">
         <h5>📝 Deja tu Valoración</h5>
@@ -48,7 +48,7 @@
       </div>
     </div>
 
-    <!-- Promedio de valoraciones -->
+    <!-- Promedio de valoraciones. -->
     <div class="card mb-4">
       <div class="card-body text-center">
         <h3 class="mb-2">Valoración Promedio</h3>
@@ -60,7 +60,7 @@
       </div>
     </div>
 
-    <!-- Lista de valoraciones -->
+    <!-- Lista de valoraciones. -->
     <h4 class="mb-3">💬 Todas las Valoraciones</h4>
     <div class="row">
       <div v-for="valoracion in valoraciones" :key="valoracion.id" class="col-md-6 mb-3">
@@ -103,7 +103,7 @@ export default {
   },
   mounted() {
     this.cargarValoraciones()
-    // Pre-llenar el nombre si hay usuario
+    // Pre-llenar el nombre si hay usuario.
     const usuario = JSON.parse(localStorage.getItem('usuario'))
     if (usuario) {
       this.nuevaValoracion.nombre = usuario.nombre
@@ -115,7 +115,7 @@ export default {
       if (guardadas) {
         this.valoraciones = JSON.parse(guardadas)
       } else {
-        // Valoraciones de ejemplo
+        // Valoraciones de ejemplo.
         this.valoraciones = [
           {
             id: 1,
@@ -146,7 +146,7 @@ export default {
       
       alert('✅ ¡Gracias por tu valoración!')
       
-      // Limpiar formulario
+      // Limpiar formulario.
       this.nuevaValoracion = {
         nombre: this.nuevaValoracion.nombre,
         rating: 5,
